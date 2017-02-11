@@ -37,18 +37,18 @@ class InputManager():
         self.joybuttonevents = {}
         if self.joypad_enabled:
             # init joypads
-            pygame.joystick.init()
-            for j_input in [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]:
-                j_input.init()
+          pygame.joystick.init()
+          for j_input in [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]:
+              j_input.init()
 
-                # not sure how expensive getting numbutton type calls are, so store in memory
-                self.joysticks.append({
-                    'obj':j_input,
-                    'num_axes':j_input.get_numaxes(),
-                    'num_buttons':j_input.get_numbuttons(),
-                    'axisstates':{},
-                    'buttonstates':{}
-                })
+              # not sure how expensive getting numbutton type calls are, so store in memory
+              self.joysticks.append({
+                  'obj':j_input,
+                  'num_axes':j_input.get_numaxes(),
+                  'num_buttons':j_input.get_numbuttons(),
+                  'axisstates':{},
+                  'buttonstates':{}
+              })
 
     def _fetch_inputs(self):
         self.keystate = pygame.key.get_pressed()
@@ -68,7 +68,7 @@ class InputManager():
 
             #buttons
             for i in range(joystick['num_buttons']):
-                joystick['buttonstates'][i] = joystick['obj'].get_button(i)
+                 joystick['buttonstates'][i] = joystick['obj'].get_button(i)
 
     def reset_events(self):
         self.keyevents = {}
@@ -119,3 +119,5 @@ class InputManager():
         if event not in self.mouseevents:
             self.mouseevents[event] = {}
         self.mouseevents[event][button] = 1
+
+im = InputManager()

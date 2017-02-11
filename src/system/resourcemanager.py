@@ -1,7 +1,6 @@
-from tile import Tile
-from settings import *
 import pygame
 import sys
+from config import CONFIG
 
 class ResourceManager():
     def __init__(self):
@@ -9,7 +8,6 @@ class ResourceManager():
         self.sounds = {}
         self.fonts = {}
         self.music = {}
-        print "init"
         self._load_system_fonts()
 
     def get_num_tiles_loaded(self):
@@ -22,16 +20,16 @@ class ResourceManager():
         return total
 
     def load_tileset_by_id(self, id):
-        self._load_tileset(SETTINGS['tile_configs']['tilesets'][id])
+        self._load_tileset(CONFIG['tile_configs']['tilesets'][id])
 
-    # tileset is a param from SETTINGS['tile_configs']['tile_sets']
-    def _load_tileset(self, tileset, width=SETTINGS['tile_size'], height=SETTINGS['tile_size']):
+    # tileset is a param from CONFIG['tile_configs']['tile_sets']
+    def _load_tileset(self, tileset, width=CONFIG['tile_size'], height=CONFIG['tile_size']):
         if tileset['filename'] in self.tilesets:
             return
 
         self.tilesets[tileset['filename']] = {}
 
-        image = pygame.image.load(SETTINGS['tileset_path'] + tileset['filename']).convert()
+        image = pygame.image.load(CONFIG['tileset_path'] + tileset['filename']).convert()
         image.set_colorkey(tileset['colorkey'])
         image_width, image_height = image.get_size()
 
@@ -41,7 +39,7 @@ class ResourceManager():
                 rect = (tile_x * width, tile_y * height, width, height)
                 count = 0
                 self.tilesets[tileset['filename']][col] = {}
-                for i in SETTINGS['zoom_level']:
+                for i in CONFIG['zoom_level']:
                     self.tilesets[tileset['filename']][col][i] = pygame.transform.scale(image.subsurface(rect), (width * i, height * i))
                     count += 1
                 col += 1
@@ -51,21 +49,21 @@ class ResourceManager():
         return self.tilesets[filename][tile_id][scale]
 
     def get_tile_by_id(self, tileset_id, tile_id, scale = 1):
-        if SETTINGS['tile_configs']['tilesets'][tileset_id]['filename'] not in self.tilesets:
+        if CONFIG['tile_configs']['tilesets'][tileset_id]['filename'] not in self.tilesets:
             print "Loading tileset: " + str(tileset_id)
             self.load_tileset_by_id(tileset_id)
-        return self.tilesets[SETTINGS['tile_configs']['tilesets'][tileset_id]['filename']][tile_id][scale]
+        return self.tilesets[CONFIG['tile_configs']['tilesets'][tileset_id]['filename']][tile_id][scale]
 
     def unload_tileset(self, filename):
         del self.tilesets[filename]
 
     def load_font_by_id(self, font_id):
         if font_id not in self.fonts:
-            font_name = SETTINGS['system_fonts'][font_id]
+            font_name = CONFIG['system_fonts'][font_id]
             self.fonts[font_id] = {
                         'filename' : font_name[0],
                         'size' : font_name[1],
-                        'obj' : pygame.font.Font(SETTINGS['font_path'] + font_name[0], font_name[1]),
+                        'obj' : pygame.font.Font(CONFIG['font_path'] + font_name[0], font_name[1]),
                     }
 
     def unload_font_by_id(self, font_id):
@@ -73,7 +71,7 @@ class ResourceManager():
             del self.fonts[font_id]
 
     def _load_system_fonts(self):
-        for k, font in SETTINGS['system_fonts'].items():
+        for k, font in CONFIG['system_fonts'].items():
             self.load_font_by_id(k)
 
     def get_sysfont(self):

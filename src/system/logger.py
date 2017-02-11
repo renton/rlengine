@@ -1,20 +1,20 @@
 from settings import *
 
 class Logger():
-    def __init__(self):
-        self.logs = []
+  def __init__(self):
+    self.logs = []
 
-    def add_log(self, log, mode = LOG_MODE_SYSTEM):
-        if len(self.logs) >= SETTINGS['log_store_max']:
-            del self.logs[-1]
-        self.logs.insert(0, (log, mode))
+  def add_log(self, log, mode = LOG_MODE_SYSTEM):
+    if len(self.logs) >= SETTINGS['log_store_max']:
+      del self.logs[-1]
+    self.logs.insert(0, (log, mode))
 
-    def clear_logs(self):
-        del self.logs
-        self.logs = []
+  def clear_logs(self):
+    del self.logs
+    self.logs = []
 
-    def write_logs_to_file(self):
-        #TODO STUB
-        pass
+  def write_logs_to_file(self):
+    #TODO STUB
+    pass
 
 log = Logger()
