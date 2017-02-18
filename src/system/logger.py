@@ -1,11 +1,11 @@
-from settings import *
+from config import CONFIG, LOG_MODE_SYSTEM
 
 class Logger():
   def __init__(self):
     self.logs = []
 
   def add_log(self, log, mode = LOG_MODE_SYSTEM):
-    if len(self.logs) >= SETTINGS['log_store_max']:
+    if len(self.logs) >= CONFIG['log_store_max']:
       del self.logs[-1]
     self.logs.insert(0, (log, mode))
 

@@ -4,6 +4,8 @@ import pygame
 from config import CONFIG
 from src.system.inputmanager import im
 from src.system.resourcemanager import rm
+from src.states.state import State
+from src.player import Player
 from pygame.locals import *
 
 class Game():
@@ -12,6 +14,9 @@ class Game():
         self.clock = pygame.time.Clock()
         self.fps = CONFIG['default_fps']
         self.playtime = 0.0
+
+        # init player
+        self.p1 = Player()
 
         # init screen
         flags = pygame.FULLSCREEN if CONFIG['fullscreen_mode'] else 0
@@ -22,7 +27,7 @@ class Game():
         self.mouse_x, self.mouse_y = (0, 0)
 
         # set into state
-        self._set_cur_state(CONFIG['intro_state'])
+        self._set_cur_state(State(self.screen, self.p1))
 
     def _set_cur_state(self, state):
         self.cur_state = state
@@ -54,6 +59,6 @@ class Game():
               pygame.display.quit()
               sys.exit()
 
-          #self.cur_state.set_fps(self.clock.get_fps())
-          #self.cur_state.run_mainloop()
+          self.cur_state.set_fps(self.clock.get_fps())
+          self.cur_state.run_mainloop()
 
