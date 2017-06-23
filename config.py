@@ -16,6 +16,9 @@ CONFIG = {
     'fps_draw_x'        : 10,
     'fps_draw_y'        : 10,
 
+    # map
+    'zoom_levels'       : (1, 2, 4),
+
     # game
     'intro_state'               : None,
     'tile_size'                 : 32,
@@ -44,5 +47,14 @@ CONFIG = {
     'log_colours'               : {
                                     LOG_MODE_SYSTEM : (255, 255, 255),
                                 },
-}
 
+    # widget
+    'widget_list_line_spacing'          : 40,
+    'widget_default_menu_font_colour'   : (255, 255, 255),
+    'widget_default_menu_bg_colour'     : (100, 100, 100),
+    'widget_default_menu_font'          : 0,
+    'widget_default_menu_line_spacing'  : 40,
+    'widget_default_menu_draw_x'        : 50,
+    'widget_default_menu_draw_y'        : 50,
+
+}

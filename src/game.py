@@ -1,12 +1,16 @@
 import sys
 import pygame
 
-from config import CONFIG
+from config import CONFIG, EVENT_CUSTOM_SWITCH_STATE, EVENT_CUSTOM_CREATE_STATE
 from src.system.inputmanager import im
 from src.system.resourcemanager import rm
-from src.states.state import State
 from src.player import Player
 from pygame.locals import *
+
+from src.states import State
+from src.custom.states import MainMenuState
+
+START_STATE = MainMenuState
 
 class Game():
     def __init__(self):
@@ -27,10 +31,14 @@ class Game():
         self.mouse_x, self.mouse_y = (0, 0)
 
         # set into state
-        self._set_cur_state(State(self.screen, self.p1))
+        self._set_cur_state(START_STATE(self.screen, self.p1))
 
     def _set_cur_state(self, state):
         self.cur_state = state
+
+    # TODO pass custom state class here
+    def _evoke_new_state(self, state):
+        self._set_cur_state(State(self.screen, self.p1))
 
     def mainloop(self):
         while(1):
@@ -44,13 +52,23 @@ class Game():
 
           # handle events
           for event in pygame.event.get():
-              if event.type == pygame.quit:
-                  pygame.display.quit()
-                  sys.exit()
+            if event.type == EVENT_CUSTOM_SWITCH_STATE:
+                self._set_cur_state(event.loadstate)
+            if event.type == EVENT_CUSTOM_CREATE_STATE:
+                self._evoke_new_state(event.createstate)
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                im.set_key_event(event.type, event.key)
+            if event.type == pygame.JOYBUTTONDOWN:
+                im.set_joy_button_event(event.type, event.button)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                im.set_mouse_event(event.type, event.button)
 
           # let state handle input
           im.update()
-          #self.cur_state.input(self.im)
+          self.cur_state.input(im)
 
           keystate = pygame.key.get_pressed()
 
@@ -61,4 +79,3 @@ class Game():
 
           self.cur_state.set_fps(self.clock.get_fps())
           self.cur_state.run_mainloop()
-

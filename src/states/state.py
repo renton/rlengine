@@ -57,8 +57,8 @@ class State():
         self.widgets.append(widget)
 
     def _after_draw(self):
-        self.draw_logs()
         self.draw_widgets()
+        self.draw_logs()
         self.draw_fps()
         pygame.display.flip()
 
