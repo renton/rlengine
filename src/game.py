@@ -10,6 +10,8 @@ from pygame.locals import *
 from src.states import State
 from src.custom.states import MainMenuState
 
+from src.map import Map
+
 START_STATE = MainMenuState
 
 class Game():
@@ -32,6 +34,9 @@ class Game():
 
         # set into state
         self._set_cur_state(START_STATE(self.screen, self.p1))
+
+        test = Map(True)
+        rm.get_tile_by_id(0,0)
 
     def _set_cur_state(self, state):
         self.cur_state = state

@@ -39,7 +39,7 @@ class ResourceManager():
                 rect = (tile_x * width, tile_y * height, width, height)
                 count = 0
                 self.tilesets[tileset['filename']][col] = {}
-                for i in CONFIG['zoom_level']:
+                for i in CONFIG['zoom_levels']:
                     self.tilesets[tileset['filename']][col][i] = pygame.transform.scale(image.subsurface(rect), (width * i, height * i))
                     count += 1
                 col += 1

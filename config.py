@@ -23,6 +23,8 @@ CONFIG = {
     'intro_state'               : None,
     'tile_size'                 : 32,
     'default_background_colour' : (0, 0, 0),
+    'sample_map_x_size'         : 20,
+    'sample_map_y_size'         : 20,
 
     # assets
     'asset_path'            : 'assets/',
@@ -56,5 +58,8 @@ CONFIG = {
     'widget_default_menu_line_spacing'  : 40,
     'widget_default_menu_draw_x'        : 50,
     'widget_default_menu_draw_y'        : 50,
+
+    # tilests
+    'tileset_path'                      : 'assets/tilesets/'
 
 }
