@@ -10,14 +10,16 @@ CONFIG = {
     # window
     'default_fps'       : 60,
     'fullscreen_mode'   : False,
-    'window_x_size'     : 800,
-    'window_y_size'     : 600,
+    'window_x_size'     : 1280,
+    'window_y_size'     : 1024,
     'window_name'       : 'rlengine',
     'fps_draw_x'        : 10,
     'fps_draw_y'        : 10,
 
     # map
-    'zoom_levels'       : (1, 2, 4),
+    'zoom_levels'           : (1, 2, 4),
+    'delay_indicator_colour': (255, 255, 255),
+
 
     # game
     'intro_state'               : None,
@@ -60,6 +62,17 @@ CONFIG = {
     'widget_default_menu_draw_y'        : 50,
 
     # tilests
-    'tileset_path'                      : 'assets/tilesets/'
+    'tileset_path'                      : 'assets/tilesets/',
+
+    # tileset viewer tool
+    'tool_tileviewer_max_col_size'      : 48,
+    'tool_tileviewer_font_colour'       : (0, 0, 0),
 
 }
+
+
+CONFIG['map_window_size_x'] = CONFIG['window_x_size'] / CONFIG['tile_size']
+CONFIG['map_window_size_y'] = CONFIG['window_y_size'] / CONFIG['tile_size']
+
+CONFIG['min_zoom'] = 0
+CONFIG['max_zoom'] = len(CONFIG['zoom_levels'])-1 

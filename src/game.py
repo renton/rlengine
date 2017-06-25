@@ -7,12 +7,14 @@ from src.system.resourcemanager import rm
 from src.player import Player
 from pygame.locals import *
 
-from src.states import State
+from src.states import State, ToolTilesetViewState
 from src.custom.states import MainMenuState
+from src.states import MapState
 
 from src.map import Map
 
-START_STATE = MainMenuState
+# TODO pass instantiated object, then you don't have to worry about params
+START_STATE = MapState
 
 class Game():
     def __init__(self):
@@ -32,10 +34,12 @@ class Game():
         # init mouse
         self.mouse_x, self.mouse_y = (0, 0)
 
-        # set into state
-        self._set_cur_state(START_STATE(self.screen, self.p1))
+        # setup debug states
+        self.tooltilesetviewstate = ToolTilesetViewState(self.screen, self.p1) 
 
-        test = Map(True)
+        # set into state
+        self._set_cur_state(START_STATE(self.screen, self.p1, Map(True)))
+
         rm.get_tile_by_id(0,0)
 
     def _set_cur_state(self, state):
@@ -81,6 +85,10 @@ class Game():
           if keystate[K_q] and (keystate[K_LCTRL] or keystate[K_RCTRL]):
               pygame.display.quit()
               sys.exit()
+
+          if keystate[K_F1]:
+              self.cur_state = self.tooltilesetviewstate
+              self.cur_state._force_draw()
 
           self.cur_state.set_fps(self.clock.get_fps())
           self.cur_state.run_mainloop()
