@@ -35,7 +35,6 @@ class UnitEntity(Entity):
         self.tileset_id = 0
         self.tile_id = 963
 
-        self._build_anatomy()
         self._load_equipment_slots()
 
     def _decorator_is_alive(func):

@@ -15,14 +15,14 @@ class Entity():
 
         self.hp             = 1
         self.max_hp         = 1
-        self.move_speed     = 0
+        self.move_speed     = 10
         self.tile_id        = 3024
         self.tileset_id     = 0
         self.name           = ''
         self.description    = ''
 
         self.active         = True
-        self.delay          = 0
+        self.delay          = 10
         self.indestructable = False
         self.attackable     = False
         self.passable       = False

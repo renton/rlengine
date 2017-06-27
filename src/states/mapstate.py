@@ -95,7 +95,7 @@ class MapState(State):
                                                     )
                                 #draw lifebars
                                 if self.display_health_indicators and e.attackable:
-                                    pygame.draw.rect(self.screen, CONFIGS['lifebar_bg_colour'], (
+                                    pygame.draw.rect(self.screen, CONFIG['lifebar_bg_colour'], (
                                         ((e.x - self.camera_tile_x) * self.get_zoomed_tile_size()),
                                         ((e.y - self.camera_tile_y) * self.get_zoomed_tile_size()),
                                         self.get_zoomed_tile_size(),

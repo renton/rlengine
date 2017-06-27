@@ -118,6 +118,14 @@ CONFIG = {
 }
 
 
+# UI
+CONFIG['lifebar_bg_colour'] = (255, 0, 0)
+CONFIG['lifebar_fg_colour'] = (0, 255, 0)
+CONFIG['lifebar_fg_warning_colour'] = (255, 255, 0)
+CONFIG['lifebar_fg_danger_colour'] = (75, 0, 0)
+CONFIG['lifebar_height'] = 3
+
+
 CONFIG['map_window_size_x'] = CONFIG['window_x_size'] / CONFIG['tile_size']
 CONFIG['map_window_size_y'] = CONFIG['window_y_size'] / CONFIG['tile_size']
 

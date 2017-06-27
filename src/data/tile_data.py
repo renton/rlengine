@@ -35,7 +35,7 @@ CONFIG['gametiles'] = {
                                     'tileset_id' : 0,
                                     'tile_id' : 1405,
                                     'walkable' : True,
-                                    'los_over' : True,
+                                    'los_over' : False,
                                 },
 
                             3 : {
@@ -43,7 +43,7 @@ CONFIG['gametiles'] = {
                                     'description' : '',
                                     'tileset_id' : 0,
                                     'tile_id' : 210,
-                                    'walkable' : True,
+                                    'walkable' : False,
                                     'los_over' : True,
                                 },
                             }
