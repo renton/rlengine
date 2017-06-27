@@ -10,6 +10,7 @@ from pygame.locals import *
 from src.states import State, ToolTilesetViewState
 from src.custom.states import MainMenuState
 from src.states import MapState
+from src.entities import Entity
 
 from src.map import Map
 
@@ -40,6 +41,8 @@ class Game():
         # set into state
         self._set_cur_state(START_STATE(self.screen, self.p1, Map(True)))
 
+        test = Entity(1)
+        print test.__dict__
         rm.get_tile_by_id(0,0)
 
     def _set_cur_state(self, state):
