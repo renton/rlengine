@@ -68,6 +68,53 @@ CONFIG = {
     'tool_tileviewer_max_col_size'      : 48,
     'tool_tileviewer_font_colour'       : (0, 0, 0),
 
+    # anatomy
+    'anatomy_types' :  {
+            0 : {
+                    'name' : 'humanoid',
+                    'weapon_slots' : [7, 8],
+                    'weapon_swap_slots' : {9 : 7, 10 : 8},
+                    'parts' : {
+                                0 : {
+                                        'name' : 'head',
+                                    },
+                                1 : {
+                                        'name' : 'body',
+                                    },
+                                2 : {
+                                        'name' : 'l.hand',
+                                    },
+                                3 : {
+                                        'name' : 'r.hand',
+                                    },
+                                4 : {
+                                        'name' : 'legs',
+                                    },
+                                5 : {
+                                        'name' : 'l.foot',
+                                    },
+                                6 : {
+                                        'name' : 'r.foot',
+                                    },
+                                7 : {
+                                        'name' : 'l.hand item',
+                                    },
+                                8 : {
+                                        'name' : 'r.hand item',
+                                    },
+                                9 : {
+                                        'name' : 'alt l.hand',
+                                    },
+                                10 : {
+                                        'name' : 'alt r.hand',
+                                    },
+                                }
+                    },
+            },
+
+    # units
+    'default_player_team'   : 1,
+
 }
 
 

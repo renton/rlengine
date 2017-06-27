@@ -1,5 +1,4 @@
 from config import CONFIG
-from src.data.entity_data import *
 from src.system.logger import log
 from random import randint
 import uuid
@@ -9,14 +8,30 @@ class Entity():
         self.e_id = e_id
         self.u_id = uuid.uuid4().hex
         self.ai = True
-        self.stats = {}
-        self.inventory = {}
 
         self.cur_map = None
         self.x = None
         self.y = None
 
-        self._load_data(CONFIG['default_entity_stats'])
+        self.hp             = 1
+        self.max_hp         = 1
+        self.move_speed     = 0
+        self.tile_id        = 3024
+        self.tileset_id     = 0
+        self.name           = ''
+        self.description    = ''
+
+        self.active         = True
+        self.delay          = 0
+        self.indestructable = False
+        self.attackable     = False
+        self.passable       = False
+
+        self.stats = {}
+        self.inventory = {}
+        
+        # TODO overrides - this should be passed as an optional param instead of config
+        self._load_data({})
 
     def _decorator_is_active(func):
         def func_wrapper(*args):
