@@ -9,6 +9,7 @@ from src.states import State
 #from inventorystate import InventoryState
 from src.map import Map
 from src.player import Player
+from src.renderers import EntityRenderer
 
 from src.system.resourcemanager import rm
 from src.system.logger import log
@@ -24,9 +25,9 @@ class MapState(State):
         self.zoom_level = 1
         self.fixed_camera = True
         self.camera_target = None
-        self.display_health_indicators = True
-        self.display_delay_indicators = True
         self.set_map(defaultmap)
+
+        self.entity_renderer = EntityRenderer(self.screen)
 
         #self.i_state = InventoryState(self.screen, self.p1, self)
 
@@ -69,54 +70,32 @@ class MapState(State):
                         tile = self.cur_map.tiles[self.camera_tile_x + x][self.camera_tile_y + y]
                         self._draw_tile(tile, x, y)
                         for e_uid,e in tile.get_entities().items():
+                            ex = (e.x - self.camera_tile_x) * self.get_zoomed_tile_size()
+                            ey = (e.y - self.camera_tile_y) * self.get_zoomed_tile_size()
+
                             if e.cur_map:
-                                tiles_to_draw = e.get_tiles_to_draw()
-                                for sprite in tiles_to_draw:
-                                    self.screen.blit(
-                                            rm.get_tile_by_id(sprite[0], sprite[1], CONFIG['zoom_levels'][self.zoom_level]), (
-                                                (e.x - self.camera_tile_x) * self.get_zoomed_tile_size(),
-                                                (e.y - self.camera_tile_y) * self.get_zoomed_tile_size()))
+                                self.entity_renderer.draw_entity(
+                                                                e.get_tiles_to_draw(),
+                                                                ex,
+                                                                ey,
+                                                                self.zoom_level,
+                                )
 
-                                # draw delay
-                                if self.display_delay_indicators and self.p1.e != e and self.camera_target and e.attackable:
-                                    # TODO better algorithm for outlining
-                                    text = rm.get_bold_font(1).render(str(e.delay), 1, (0,0,0))
-                                    self.screen.blit(text, (
-                                                                (e.x - self.camera_tile_x) * self.get_zoomed_tile_size() - 1,
-                                                                ((e.y - self.camera_tile_y) * self.get_zoomed_tile_size()) + self.get_zoomed_tile_size() - rm.fonts[0]['size'] - 2 - 1,
-                                                            )
-                                                    )
+                            if self.p1.e != e and self.camera_target and e.attackable:
+                                self.entity_renderer.draw_delay(
+                                                                ex,
+                                                                ey + self.get_zoomed_tile_size() - rm.fonts[CONFIG['system_font_default']]['size'] - 2,
+                                                                e.delay,
+                                )
 
-                                    text = rm.get_bold_font(1).render(str(e.delay), 1, CONFIG['delay_indicator_colour'])
-                                    self.screen.blit(text, (
-                                                                (e.x - self.camera_tile_x) * self.get_zoomed_tile_size(),
-                                                                ((e.y - self.camera_tile_y) * self.get_zoomed_tile_size()) + self.get_zoomed_tile_size() - rm.fonts[0]['size'] - 2,
-                                                            )
-                                                    )
-                                #draw lifebars
-                                if self.display_health_indicators and e.attackable:
-                                    pygame.draw.rect(self.screen, CONFIG['lifebar_bg_colour'], (
-                                        ((e.x - self.camera_tile_x) * self.get_zoomed_tile_size()),
-                                        ((e.y - self.camera_tile_y) * self.get_zoomed_tile_size()),
-                                        self.get_zoomed_tile_size(),
-                                        CONFIG['lifebar_height']),
-                                        0)
-
-                                    if e.hp > (e.max_hp / 2):
-                                        colour = CONFIG['lifebar_fg_colour']
-                                    else:
-                                        if e.hp > (e.max_hp / 4):
-                                            colour = CONFIG['lifebar_fg_warning_colour']
-                                        else:
-                                            colour = CONFIG['lifebar_fg_danger_colour']
-
-                                    pygame.draw.rect(self.screen, colour, (
-                                        ((e.x - self.camera_tile_x) * self.get_zoomed_tile_size()),
-                                        ((e.y - self.camera_tile_y) * self.get_zoomed_tile_size()),
-                                        ((float)(e.hp / 100.0) * (float)(self.get_zoomed_tile_size())),
-                                        CONFIG['lifebar_height']),
-                                        0)
-
+                            if e.attackable:
+                                self.entity_renderer.draw_lifebars(
+                                                                ex,
+                                                                ey,
+                                                                self.get_zoomed_tile_size(),
+                                                                e.hp,
+                                                                e.max_hp,
+                                )
 
     def _draw_tile(self, tile, x, y):
         self.screen.blit(

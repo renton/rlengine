@@ -13,8 +13,8 @@ class Entity():
         self.x = None
         self.y = None
 
-        self.hp             = 1
-        self.max_hp         = 1
+        self.hp             = 50
+        self.max_hp         = 100
         self.move_speed     = 10
         self.tile_id        = 3024
         self.tileset_id     = 0
