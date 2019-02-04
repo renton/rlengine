@@ -22,14 +22,14 @@ class Entity():
         self.description    = ''
 
         self.active         = True
-        self.delay          = 10
+        self.delay          = 0
         self.indestructable = False
         self.attackable     = False
         self.passable       = False
 
         self.stats = {}
         self.inventory = {}
-        
+
         # TODO overrides - this should be passed as an optional param instead of config
         self._load_data({})
 

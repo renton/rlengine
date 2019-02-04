@@ -13,6 +13,7 @@ class UnitEntity(Entity):
         Entity.__init__(self, e_id)
 
         self.alive                  = True
+        self.ai                     = False
         self.swap_alt_delay         = 10
         self.equipment_paradigm_id  = None
         self.unit_group             = -1
@@ -65,7 +66,7 @@ class UnitEntity(Entity):
     def unequip(self, slot):
         # remove stats + skills + statuses
         if self.is_slot_equipped(slot):
-            tmp = self.equipped[slot] 
+            tmp = self.equipped[slot]
             self.equipped[slot] = None
             return tmp
         return None
@@ -154,7 +155,7 @@ class UnitEntity(Entity):
             if targets:
                 target = choice(list(targets))
                 self.attack(target)
-                return 
+                return
             else:
                 # check if target is too far way
                 if self.get_target():
@@ -190,7 +191,7 @@ class UnitEntity(Entity):
 
                         if map.is_walkable(self.x + delta_x, self.y + delta_y):
                             self.walk(map, delta_x, delta_y)
-                            return 
+                            return
 
                 # random movement
                 can_move = False
@@ -261,7 +262,7 @@ class UnitEntity(Entity):
         del self.equipped[slot]
 
     def pickup(self, tile):
-        # move item from ground to inventory 
+        # move item from ground to inventory
         pass
 
     def pickup_all(self, tile):

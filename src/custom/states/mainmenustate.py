@@ -1,6 +1,6 @@
 import pygame
 
-from src.states import MenuState
+from src.states import MenuState, MapState
 from config import EVENT_CUSTOM_CREATE_STATE
 
 MAIN_MENU_DRAW_X = 50
@@ -20,7 +20,8 @@ class MainMenuState(MenuState):
 
     def exec_new_game(self):
         # special start new game event state?? or create the state here
-        pygame.event.post(pygame.event.Event(EVENT_CUSTOM_CREATE_STATE, createstate = None))
+        # TODO handle variable *args
+        pygame.event.post(pygame.event.Event(EVENT_CUSTOM_CREATE_STATE, createstate = MapState))
 
     def exec_exit_game(self):
         pygame.event.post(pygame.event.Event(pygame.QUIT))

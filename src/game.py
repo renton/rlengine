@@ -15,7 +15,7 @@ from src.entities import Entity, UnitEntity
 from src.map import Map
 
 # TODO pass instantiated object, then you don't have to worry about params
-START_STATE = MapState
+START_STATE = MainMenuState
 
 class Game():
     def __init__(self):
@@ -39,17 +39,15 @@ class Game():
         self.tooltilesetviewstate = ToolTilesetViewState(self.screen, self.p1)
 
         # set into state
-        self._set_cur_state(START_STATE(self.screen, self.p1, Map(True)))
-
-        test = UnitEntity(1)
-        self.cur_state.add_entity_to_map(test,3,3)
+        self._set_cur_state(START_STATE(self.screen, self.p1))
 
     def _set_cur_state(self, state):
         self.cur_state = state
 
     # TODO pass custom state class here
     def _evoke_new_state(self, state):
-        self._set_cur_state(State(self.screen, self.p1))
+        # TODO handle variable *args
+        self._set_cur_state(state(self.screen, self.p1))
 
     def mainloop(self):
         while(1):
@@ -92,8 +90,8 @@ class Game():
                 self.cur_state = self.tooltilesetviewstate
                 self.cur_state._force_draw()
 
-            if keystate[K_F1]:
-                self.cur_state = self.dataviewstate
+            if keystate[K_F2]:
+                #self.cur_state = self.dataviewstate
                 self.cur_state._force_draw()
 
 

@@ -9,29 +9,49 @@ from src.states import State
 #from inventorystate import InventoryState
 from src.map import Map
 from src.player import Player
+from src.entities import UnitEntity
 from src.renderers import EntityRenderer
 
 from src.system.resourcemanager import rm
 from src.system.logger import log
 from config import CONFIG
 
+MOVE_KEYS = {
+    K_KP1 : (-1, 1),
+    K_KP2 : (0, 1),
+    K_KP3 : (1, 1),
+    K_KP4 : (-1, 0),
+    K_KP5 : (0, 0),
+    K_KP6 : (1, 0),
+    K_KP7 : (-1, -1),
+    K_KP8 : (0, -1),
+    K_KP9 : (1, -1),
+}
+
 #TODO heavy refactoring. this should never be instanced. entity drawing should have it's own renderer. the instanced subclass can define that
 
 class MapState(State):
-    def __init__(self, screen, player, defaultmap):
+    def __init__(self, screen, player):
         State.__init__(self, screen, player)
 
-        self._set_camera(0, 0)
-        self.zoom_level = 1
-        self.fixed_camera = True
         self.camera_target = None
-        self.set_map(defaultmap)
-
+        self.entities = []
+        self.fixed_camera = True
+        self.zoom_level = 1
         self.entity_renderer = EntityRenderer(self.screen)
 
-        #self.i_state = InventoryState(self.screen, self.p1, self)
+        self.set_map(Map(True))
+        self._set_camera(0, 0)
 
-        self.entities = []
+        test1 = UnitEntity(1)
+        #test2 = UnitEntity(1)
+
+        self.add_entity_to_map(test1, 5, 5)
+        self.p1.bind_entity(test1)
+        self.set_follow_camera(test1)
+        #self.add_entity_to_map(test2, 6, 6)
+
+        #self.i_state = InventoryState(self.screen, self.p1, self)
 
     def set_map(self, newmap):
         self.cur_map = newmap
@@ -132,7 +152,7 @@ class MapState(State):
 
         if im.is_key_event(KEYDOWN, K_q):
             self.fixed_camera = not self.fixed_camera
-            log.add_log("camera: " + ("fixed" if self.fixed_camera else "follow")) 
+            log.add_log("camera: " + ("fixed" if self.fixed_camera else "follow"))
             self._force_draw()
 
         if im.is_key_event(KEYDOWN, K_z):
@@ -151,11 +171,18 @@ class MapState(State):
         if im.is_key_event(KEYDOWN, K_n):
             self.p1.unbind_entity()
             self._force_draw()
+
+        # movement
+        for k,v in MOVE_KEYS.items():
+            if im.is_key_event(KEYDOWN, k):
+                self.p1.move_e(self.cur_map, v[0], v[1])
+                self._force_draw()
+                break
         '''
         if im.is_key_event(KEYDOWN, K_g):
             # successfully picked up
             (pickedup, dropped) = self.p1.e.pickup(self.cur_map.tiles[self.p1.e.x][self.p1.e.y])
-            for item in pickedup: 
+            for item in pickedup:
                 self.remove_entity_from_map(item)
             for item in dropped:
                 self.add_entity_to_map(item, self.p1.e.x, self.p1.e.y)

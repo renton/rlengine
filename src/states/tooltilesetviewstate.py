@@ -10,8 +10,9 @@ from src.system.resourcemanager import rm
 
 class ToolTilesetViewState(MapState):
     def __init__(self, screen, player):
+        MapState.__init__(self, screen, player)
         self.cur_map = self.gen_tileset_map(0)
-        MapState.__init__(self, screen, player, self.cur_map)
+        self.set_map(self.cur_map)
 
         self.fixed_camera = True
         self.bg_colour = (255, 255, 255)

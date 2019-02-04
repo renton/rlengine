@@ -18,6 +18,7 @@ class Player():
 
     def move_e(self, map, x, y):
         if self.e:
+
             # instant moves
             if x == 0 and y == 0:
                 # wait
@@ -36,7 +37,7 @@ class Player():
                         return
                 else:
                     self.had_input = self.e.walk(map, x, y)
-    
+
     def wait_for_input(self):
         self.had_input = False
 
