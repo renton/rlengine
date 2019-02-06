@@ -1,31 +1,33 @@
-from src.entities import Entity
-from src.system.logger import log
 from random import randint, choice
 from sets import Set
-from src.algos import *
 from config import CONFIG
+
+from src.entities import Entity
+from src.system.logger import log
+from src.algos import *
 
 # TODO move some of the long SETTINGS key strings into their own functions in either classes or settings file
 # TODO might not need to equip whole item... just durability and some other things
+
+# TODO can pass in different AI classes instantiated with different config params
 
 class UnitEntity(Entity):
     def __init__(self, e_id):
         Entity.__init__(self, e_id)
 
         self.alive                  = True
-        self.ai                     = False
-        self.swap_alt_delay         = 10
-        self.equipment_paradigm_id  = None
+        self.ai                     = True
+        self.attackable             = True
         self.unit_group             = -1
-        self.ai_radius_vision       = 10
-        self.ai_target_ignore_range = 15
         self.target                 = None
         self.corpse_id              = 0
         self.anatomy_id             = 0
-        self.attackable             = True
 
-        # TODO this gets past in as param to build specific units
-        self._load_data({})
+        self.equipment_paradigm_id  = None
+        self.swap_alt_delay         = 10
+
+        self.ai_radius_vision       = 10
+        self.ai_target_ignore_range = 15
 
         self.statuses = {}
         self.skills = {}
@@ -34,7 +36,10 @@ class UnitEntity(Entity):
         self.anatomy = {}
 
         self.tileset_id = 0
-        self.tile_id = 963
+        self.tile_id = 1
+
+        # TODO this gets past in as param to build specific units
+        self._load_data(CONFIG['unit_data'][e_id])
 
         self._load_equipment_slots()
 
@@ -150,6 +155,7 @@ class UnitEntity(Entity):
                 for j in range(3):
                     target = map.tiles[(i - 1) + self.x][(j - 1) + self.y].get_attackable_target()
                     if target and target != self and (target.unit_group != self.unit_group or target.unit_group == -1):
+                        print(self.unit_group, target.unit_group)
                         targets.add(target)
 
             if targets:
@@ -196,6 +202,7 @@ class UnitEntity(Entity):
                 # random movement
                 can_move = False
                 open_spots = []
+                print(self.target)
                 for i in range(3):
                     for j in range(3):
                         tile = map.tiles[(i - 1) + self.x][(j - 1) + self.y]

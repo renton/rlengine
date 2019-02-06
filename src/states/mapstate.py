@@ -4,12 +4,10 @@ from pygame.locals import *
 
 from random import randrange, choice, randint
 
-#from ..entities import *
 from src.states import State
 #from inventorystate import InventoryState
 from src.map import Map
 from src.player import Player
-from src.entities import UnitEntity
 from src.renderers import EntityRenderer
 
 from src.system.resourcemanager import rm
@@ -40,24 +38,12 @@ class MapState(State):
         self.zoom_level = 1
         self.entity_renderer = EntityRenderer(self.screen)
 
-        self.set_map(Map(True))
         self._set_camera(0, 0)
-
-        test1 = UnitEntity(1)
-        #test2 = UnitEntity(1)
-
-        self.add_entity_to_map(test1, 5, 5)
-        self.p1.bind_entity(test1)
-        self.set_follow_camera(test1)
-        #self.add_entity_to_map(test2, 6, 6)
-
-        #self.i_state = InventoryState(self.screen, self.p1, self)
 
     def set_map(self, newmap):
         self.cur_map = newmap
 
     def step(self):
-        #if self.p1.e is None or self.p1.get_delay() != 0:
         if self.p1.e is None or self.p1.get_delay() != 0 or self.p1.had_input:
             self._step_entities()
             State.step(self)
@@ -101,7 +87,8 @@ class MapState(State):
                                                                 self.zoom_level,
                                 )
 
-                            if self.p1.e != e and self.camera_target and e.attackable:
+                            #if self.p1.e != e and self.camera_target and e.attackable:
+                            if self.camera_target and e.attackable:
                                 self.entity_renderer.draw_delay(
                                                                 ex,
                                                                 ey + self.get_zoomed_tile_size() - rm.fonts[CONFIG['system_font_default']]['size'] - 2,
@@ -135,6 +122,9 @@ class MapState(State):
 
     def input(self, im):
         keystate = pygame.key.get_pressed()
+
+        # debug stepper
+        #pygame.time.delay(500)
 
         # TODO camera should be able to pan to blackness at any zoom level
         if im.is_key_event(KEYDOWN, K_w) or keystate[K_w]:

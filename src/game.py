@@ -1,21 +1,21 @@
 import sys
 import pygame
+from pygame.locals import *
 
 from config import CONFIG, EVENT_CUSTOM_SWITCH_STATE, EVENT_CUSTOM_CREATE_STATE
+from src.custom.data import *
+
 from src.system.inputmanager import im
 from src.system.resourcemanager import rm
 from src.player import Player
-from pygame.locals import *
-
 from src.states import State, ToolTilesetViewState
-from src.custom.states import MainMenuState
+from src.custom.states import BvMapState
 from src.states import MapState
 from src.entities import Entity, UnitEntity
-
 from src.map import Map
 
 # TODO pass instantiated object, then you don't have to worry about params
-START_STATE = MainMenuState
+START_STATE = BvMapState
 
 class Game():
     def __init__(self):
@@ -33,7 +33,7 @@ class Game():
         pygame.display.set_caption(CONFIG['window_name'])
 
         # init mouse
-        self.mouse_x, self.mouse_y = (0, 0)
+        self.mouse_x, self.mouse_y = (0,  0)
 
         # setup debug states
         self.tooltilesetviewstate = ToolTilesetViewState(self.screen, self.p1)
@@ -62,7 +62,7 @@ class Game():
             # handle events
             for event in pygame.event.get():
               if event.type == EVENT_CUSTOM_SWITCH_STATE:
-                  self._set_cur_state(event.loadstate)
+				  self._set_cur_state(event.loadstate)
               if event.type == EVENT_CUSTOM_CREATE_STATE:
                   self._evoke_new_state(event.createstate)
               if event.type == pygame.QUIT:

@@ -7,25 +7,25 @@ class Entity():
     def __init__(self, e_id):
         self.e_id = e_id
         self.u_id = uuid.uuid4().hex
-        self.ai = True
 
-        self.cur_map = None
-        self.x = None
-        self.y = None
-
-        self.hp             = 50
-        self.max_hp         = 100
-        self.move_speed     = 10
-        self.tile_id        = 3024
-        self.tileset_id     = 0
-        self.name           = ''
-        self.description    = ''
-
+        self.ai             = True
         self.active         = True
         self.delay          = 0
         self.indestructable = False
         self.attackable     = False
         self.passable       = False
+
+        self.cur_map    = None
+        self.x          = None
+        self.y          = None
+
+        self.hp             = 50
+        self.max_hp         = 100
+        self.move_speed     = 10
+        self.tile_id        = 1
+        self.tileset_id     = 0
+        self.name           = 'abstract'
+        self.description    = 'abstract'
 
         self.stats = {}
         self.inventory = {}

@@ -130,4 +130,4 @@ CONFIG['map_window_size_x'] = CONFIG['window_x_size'] / CONFIG['tile_size']
 CONFIG['map_window_size_y'] = CONFIG['window_y_size'] / CONFIG['tile_size']
 
 CONFIG['min_zoom'] = 0
-CONFIG['max_zoom'] = len(CONFIG['zoom_levels'])-1 
+CONFIG['max_zoom'] = len(CONFIG['zoom_levels'])-1
