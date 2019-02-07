@@ -39,7 +39,7 @@ class Game():
         self.tooltilesetviewstate = ToolTilesetViewState(self.screen, self.p1)
 
         # set into state
-        self._set_cur_state(START_STATE(self.screen, self.p1))
+        self._set_cur_state(START_STATE(self.screen, self.p1, 0))
 
     def _set_cur_state(self, state):
         self.cur_state = state

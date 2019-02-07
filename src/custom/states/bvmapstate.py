@@ -1,17 +1,16 @@
 import pygame
 
-from config import EVENT_CUSTOM_CREATE_STATE
+from config import EVENT_CUSTOM_CREATE_STATE, CONFIG
 
 from src.map import Map
 from src.entities import UnitEntity
 from src.states import MapState
 
 class BvMapState(MapState):
-    def __init__(self, screen, player, room_id=None):
+    def __init__(self, screen, player, room_id=0):
         MapState.__init__(self, screen, player)
         # TODO init room settings from room_data with room_id
-
-        self.set_map(Map(True))
+        self.set_map(Map(CONFIG['room_data'][room_id]['bg_file']))
 
         test2 = UnitEntity(0)
         test2.set_unit_group(3)

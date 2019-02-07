@@ -155,7 +155,6 @@ class UnitEntity(Entity):
                 for j in range(3):
                     target = map.tiles[(i - 1) + self.x][(j - 1) + self.y].get_attackable_target()
                     if target and target != self and (target.unit_group != self.unit_group or target.unit_group == -1):
-                        print(self.unit_group, target.unit_group)
                         targets.add(target)
 
             if targets:
@@ -202,7 +201,6 @@ class UnitEntity(Entity):
                 # random movement
                 can_move = False
                 open_spots = []
-                print(self.target)
                 for i in range(3):
                     for j in range(3):
                         tile = map.tiles[(i - 1) + self.x][(j - 1) + self.y]
