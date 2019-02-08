@@ -5,7 +5,6 @@ from config import CONFIG
 #TODO relative path loading
 #TODO does each tile need an instantiated instance? lots of overhead
 #TODO support more than just square maps
-#TODO swap x + y
 
 class Map():
 
@@ -21,13 +20,15 @@ class Map():
 
     def _load_map(self):
         x, y = 0, 0
+        tile_data = []
         with open(self.bg_file, 'r') as f:
-            for line in f:
-                self.tiles.append([])
+            for line in f: # (0,0) , (0,1), (0,2), (0,3) ...
+                x = 0
                 for cell in line.split(' '):
-                    self.tiles[y].append(Tile(int(cell)))
-                y += 1
-        print len(self.tiles)
+                    if len(self.tiles) <= x:
+                        self.tiles.append([])
+                    self.tiles[x].append(Tile(int(cell)))
+                    x += 1
 
     def _gen_sample(self):
         for i in range(CONFIG['sample_map_x_size']):
