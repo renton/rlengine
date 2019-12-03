@@ -1,4 +1,4 @@
-from config import *
+from src.configs import *
 
 CONFIG['room_data'] = {
                             0 : {

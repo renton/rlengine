@@ -1,2 +1,2 @@
-from bvmapstate import BvMapState
-from mainmenustate import MainMenuState
+from .bvmapstate import BvMapState
+from .mainmenustate import MainMenuState

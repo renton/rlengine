@@ -1,6 +1,6 @@
 from src.widgets import LabelWidget
 from src.system.resourcemanager import rm
-from config import CONFIG
+from src.configs import CONFIG
 
 class MenuItemWidget(LabelWidget):
     def __init__(self, x, y, label, select_event=None):

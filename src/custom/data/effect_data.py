@@ -1,4 +1,4 @@
-from config import *
+from src.configs import *
 
 CONFIG['effect_data'] = {
                             0 : {

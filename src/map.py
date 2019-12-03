@@ -1,6 +1,6 @@
 from src.tile import Tile
 from random import choice, randint
-from config import CONFIG
+from src.configs import CONFIG
 
 #TODO relative path loading
 #TODO does each tile need an instantiated instance? lots of overhead

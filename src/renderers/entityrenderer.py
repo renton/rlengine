@@ -1,5 +1,5 @@
 import pygame
-from config import CONFIG
+from src.configs import CONFIG
 from src.system.resourcemanager import rm
 
 class EntityRenderer():

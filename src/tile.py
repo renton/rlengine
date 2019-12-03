@@ -1,5 +1,5 @@
 from random import choice,randint
-from config import CONFIG
+from src.configs import CONFIG
 from src.custom.data.tile_data import *
 
 # note: only 1 destructable entity can ever be on a tile

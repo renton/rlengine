@@ -1,4 +1,4 @@
-from config import CONFIG, LOG_MODE_SYSTEM
+from src.configs import CONFIG, LOG_MODE_SYSTEM
 
 class Logger():
   def __init__(self):

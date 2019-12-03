@@ -1,6 +1,6 @@
 import pygame
 
-from config import EVENT_CUSTOM_CREATE_STATE, CONFIG
+from src.configs import EVENT_CUSTOM_CREATE_STATE, CONFIG
 
 from src.map import Map
 from src.entities import UnitEntity

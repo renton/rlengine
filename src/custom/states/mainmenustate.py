@@ -1,7 +1,7 @@
 import pygame
 
 from src.states import MenuState, MapState
-from config import EVENT_CUSTOM_CREATE_STATE
+from src.configs import EVENT_CUSTOM_CREATE_STATE
 
 MAIN_MENU_DRAW_X = 50
 MAIN_MENU_DRAW_Y = 50

@@ -1,4 +1,4 @@
-from config import CONFIG
+from src.configs import CONFIG
 from src.system.logger import log
 from random import randint
 import uuid
@@ -104,7 +104,7 @@ class Entity():
         for attr in dir(self):
             value = getattr(self, attr)
             if not hasattr(value, '__call__'):
-                print attr + ' : ' + str(getattr(self, attr))
+                print(attr + ' : ' + str(getattr(self, attr)))
 
     @_decorator_is_active
     def attack(self, target):

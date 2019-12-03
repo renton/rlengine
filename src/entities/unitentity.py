@@ -1,6 +1,5 @@
 from random import randint, choice
-from sets import Set
-from config import CONFIG
+from src.configs import CONFIG
 
 from src.entities import Entity
 from src.system.logger import log
@@ -149,7 +148,7 @@ class UnitEntity(Entity):
             return
 
         if (self.delay <= 0):
-            targets = Set()
+            targets = set()
             # if there is an adjacent entity, it takes precendence
             for i in range(3):
                 for j in range(3):

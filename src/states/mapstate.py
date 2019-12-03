@@ -12,7 +12,7 @@ from src.renderers import EntityRenderer
 
 from src.system.resourcemanager import rm
 from src.system.logger import log
-from config import CONFIG
+from src.configs import CONFIG
 
 MOVE_KEYS = {
     K_KP1 : (-1, 1),
@@ -69,8 +69,8 @@ class MapState(State):
             self.set_camera_to_entity(self.camera_target)
 
         #TODO entity renderers should be classes that can be swapped in and out and decoupled with the mapstate
-        for x in range((CONFIG['map_window_size_x'] / CONFIG['zoom_levels'][self.zoom_level])):
-            for y in range((CONFIG['map_window_size_y'] / CONFIG['zoom_levels'][self.zoom_level])):
+        for x in range((CONFIG['map_window_size_x'] // CONFIG['zoom_levels'][self.zoom_level])):
+            for y in range((CONFIG['map_window_size_y'] // CONFIG['zoom_levels'][self.zoom_level])):
                 if ((self.camera_tile_x + x) >= 0) and ((self.camera_tile_y + y) >= 0):
                     if (((self.camera_tile_x + x) < len(self.cur_map.tiles)) and ((self.camera_tile_y + y) < len(self.cur_map.tiles[self.camera_tile_x + x]))):
                         tile = self.cur_map.tiles[self.camera_tile_x + x][self.camera_tile_y + y]
@@ -221,6 +221,6 @@ class MapState(State):
     def set_camera_to_entity(self, e):
         if e and e.alive:
             self._set_camera(
-                    e.x - ((CONFIG['map_window_size_x'] / CONFIG['zoom_levels'][self.zoom_level]) / 2),
-                    e.y - ((CONFIG['map_window_size_y'] / CONFIG['zoom_levels'][self.zoom_level]) / 2)
+                    e.x - ((CONFIG['map_window_size_x'] // CONFIG['zoom_levels'][self.zoom_level]) // 2),
+                    e.y - ((CONFIG['map_window_size_y'] // CONFIG['zoom_levels'][self.zoom_level]) // 2)
                     )

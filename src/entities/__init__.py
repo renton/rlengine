@@ -1,2 +1,2 @@
-from entity import Entity
-from unitentity import UnitEntity
+from .entity import Entity
+from .unitentity import UnitEntity

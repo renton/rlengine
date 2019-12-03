@@ -2,7 +2,7 @@ import sys
 import pygame
 from pygame.locals import *
 
-from config import CONFIG, EVENT_CUSTOM_SWITCH_STATE, EVENT_CUSTOM_CREATE_STATE
+from src.configs import CONFIG
 from src.custom.data import *
 
 from src.system.inputmanager import im
@@ -61,19 +61,19 @@ class Game():
 
             # handle events
             for event in pygame.event.get():
-              if event.type == EVENT_CUSTOM_SWITCH_STATE:
-				  self._set_cur_state(event.loadstate)
-              if event.type == EVENT_CUSTOM_CREATE_STATE:
-                  self._evoke_new_state(event.createstate)
-              if event.type == pygame.QUIT:
-                  pygame.display.quit()
-                  sys.exit()
-              if event.type == pygame.KEYDOWN:
-                  im.set_key_event(event.type, event.key)
-              if event.type == pygame.JOYBUTTONDOWN:
-                  im.set_joy_button_event(event.type, event.button)
-              if event.type == pygame.MOUSEBUTTONDOWN:
-                  im.set_mouse_event(event.type, event.button)
+                if event.type == EVENT_CUSTOM_SWITCH_STATE:
+                    self._set_cur_state(event.loadstate)
+                if event.type == EVENT_CUSTOM_CREATE_STATE:
+                    self._evoke_new_state(event.createstate)
+                if event.type == pygame.QUIT:
+                    pygame.display.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    im.set_key_event(event.type, event.key)
+                if event.type == pygame.JOYBUTTONDOWN:
+                    im.set_joy_button_event(event.type, event.button)
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    im.set_mouse_event(event.type, event.button)
 
             # let state handle input
             im.update()

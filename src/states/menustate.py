@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-from config import CONFIG
+from src.configs import CONFIG
 from src.states import State
 from src.widgets import MenuWidget
 

@@ -1,5 +1,5 @@
 from src.widgets import Widget, MenuItemWidget
-from config import CONFIG
+from src.configs import CONFIG
 
 class MenuWidget(Widget):
     def __init__(self, x, y, select_event=None):

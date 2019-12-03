@@ -1,6 +1,6 @@
 import pygame
 import sys
-from config import CONFIG
+from src.configs import CONFIG
 
 class ResourceManager():
     def __init__(self):
@@ -34,8 +34,8 @@ class ResourceManager():
         image_width, image_height = image.get_size()
 
         col = 0
-        for tile_x in range(0, image_width / width):
-            for tile_y in range(0, image_height / height):
+        for tile_x in range(0, int(image_width / width)):
+            for tile_y in range(0, int(image_height / height)):
                 rect = (tile_x * width, tile_y * height, width, height)
                 count = 0
                 self.tilesets[tileset['filename']][col] = {}
@@ -50,7 +50,7 @@ class ResourceManager():
 
     def get_tile_by_id(self, tileset_id, tile_id, scale = 1):
         if CONFIG['tile_configs']['tilesets'][tileset_id]['filename'] not in self.tilesets:
-            print "Loading tileset: " + str(tileset_id)
+            print("Loading tileset: " + str(tileset_id))
             self.load_tileset_by_id(tileset_id)
         return self.tilesets[CONFIG['tile_configs']['tilesets'][tileset_id]['filename']][tile_id][scale]
 

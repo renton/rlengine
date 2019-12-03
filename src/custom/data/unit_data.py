@@ -1,4 +1,4 @@
-from config import *
+from src.configs import *
 
 CONFIG['unit_data'] = {
                             0 : {

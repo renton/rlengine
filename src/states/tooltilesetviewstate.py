@@ -4,7 +4,7 @@ from pygame.locals import *
 from src.states import MapState, State
 from src.tile import Tile
 from src.map import Map
-from config import CONFIG
+from src.configs import CONFIG
 
 from src.system.resourcemanager import rm
 

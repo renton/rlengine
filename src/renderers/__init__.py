@@ -1,1 +1,1 @@
-from entityrenderer import EntityRenderer
+from .entityrenderer import EntityRenderer
