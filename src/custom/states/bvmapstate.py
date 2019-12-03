@@ -13,9 +13,9 @@ class BvMapState(MapState):
         self.set_map(Map(CONFIG['room_data'][room_id]['bg_file']))
 
         test2 = UnitEntity(0)
-        test2.set_unit_group(3)
+        test2.set_unit_group(2)
         test1 = UnitEntity(0)
-        test1.set_unit_group(3)
+        test1.set_unit_group(2)
 
         test3 = UnitEntity(0)
         test3.set_unit_group(2)

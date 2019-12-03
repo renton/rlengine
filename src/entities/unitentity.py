@@ -17,7 +17,7 @@ class UnitEntity(Entity):
         self.alive                  = True
         self.ai                     = True
         self.attackable             = True
-        self.unit_group             = -1
+        self.unit_group             = 1
         self.target                 = None
         self.corpse_id              = 0
         self.anatomy_id             = 0
@@ -41,6 +41,7 @@ class UnitEntity(Entity):
         self._load_data(CONFIG['unit_data'][e_id])
 
         self._load_equipment_slots()
+        print(vars(self))
 
     def _decorator_is_alive(func):
         def func_wrapper(*args):
